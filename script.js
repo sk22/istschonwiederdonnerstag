@@ -44,7 +44,6 @@ if (today === donnerstag) {
   update(
     `${daysTilDonnerstag} Tag${plural ? 'e' : ''} noch!`,
     makeBlocks(
-      countdown(daysTilDonnerstag),
       `Am ${dateString}`,
       `ist wieder`,
       `Donners&#8203;tag!`
