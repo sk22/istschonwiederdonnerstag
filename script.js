@@ -14,7 +14,7 @@ function countdown(daysLeft) {
 }
 
 function show(element) {
-  element.style.visibility = 'visible'
+  element.classList.remove('hidden')
 }
 
 const makeBlocks = (...lines) => lines
