@@ -42,6 +42,9 @@ body {
 
 @media (orientation: portrait) {
   .landscape { display: none; max-height: 100%; }
+  .announcement {
+    height: 100%;
+  }
 }
 
 @media (min-width: 768px) {
