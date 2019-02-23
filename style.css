@@ -10,16 +10,16 @@ body {
 .hero {
   height: 100vh;
   padding: 2rem;
+}
 
+.hero > * {
+  visibility: hidden;
 }
 
 #esistdo {
   display: flex;
   justify-content: center;
-}
-
-.hero > * {
-  visibility: hidden;
+  height: 100%;
 }
 
 #announcement {

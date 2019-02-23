@@ -13,6 +13,10 @@ function countdown(daysLeft) {
   return `in ${daysLeft} Tagen`
 }
 
+function show(element) {
+  element.style.visibility = 'visible'
+}
+
 const makeBlocks = (...lines) => lines
   .map(line => `<span class="block">${line}</span>`)
   .join('\n')
@@ -24,10 +28,10 @@ const millisecondsPerDay = 86400000
 if (today === donnerstag) {
   // ES IST WIEDER DONNERSTAG
   document.title = 'Es ist wieder Donnerstag!'
-  esIstDoElement.style.visibility = 'visible'
+  show(esIstDoElement)
 } else {
   // BALD IST WIEDER DONNERSTAG
-  esIstDoElement.style.display = 'none'
+  show(announcementElement)
   const daysTilDonnerstag = (donnerstag + 7 - today) % 7
   const nextDonnerstag =
     new Date(Date.now() + daysTilDonnerstag * millisecondsPerDay)
