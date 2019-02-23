@@ -1,5 +1,5 @@
 const announcementElement = document.getElementById('announcement')
-const esIstDoElements = document.getElementsByClassName('esistdo')
+const esIstDoElement = document.getElementById('esistdo')
 
 function update(subtitle, title) {
   // smallDiv.innerHTML = subtitle
@@ -24,10 +24,10 @@ const millisecondsPerDay = 86400000
 if (today === donnerstag) {
   // ES IST WIEDER DONNERSTAG
   document.title = 'Es ist wieder Donnerstag!'
-  Array.from(esIstDoElements).forEach(el => el.style.visibility = 'visible')
+  esIstDoElement.style.visibility = 'visible'
 } else {
   // BALD IST WIEDER DONNERSTAG
-  Array.from(esIstDoElements).forEach(el => el.style.display = 'none')
+  esIstDoElement.style.display = 'none'
   const daysTilDonnerstag = (donnerstag + 7 - today) % 7
   const nextDonnerstag =
     new Date(Date.now() + daysTilDonnerstag * millisecondsPerDay)

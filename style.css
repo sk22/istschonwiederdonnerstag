@@ -8,10 +8,13 @@ body {
 }
 
 .hero {
-  display: flex;
   height: 100vh;
   padding: 2rem;
-  align-items: center;
+
+}
+
+#esistdo {
+  display: flex;
   justify-content: center;
 }
 
@@ -23,7 +26,6 @@ body {
   font-weight: 700;
   overflow-wrap: break-word;
   text-transform: uppercase;
-  text-align: center;
   font-size: 5rem;
 }
 
