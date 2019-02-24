@@ -1,10 +1,10 @@
 const announcementElement = document.getElementById('announcement')
 const esIstDoElement = document.getElementById('esistdo')
+const heroElement = document.getElementById('hero')
 
 function update(subtitle, title) {
   // smallDiv.innerHTML = subtitle
   announcementElement.innerHTML = title
-  announcementElement.style.visibility = 'visible'
 }
 
 function countdown(daysLeft) {
@@ -15,6 +15,19 @@ function countdown(daysLeft) {
 
 function show(element) {
   element.classList.remove('hidden')
+}
+
+function rescale() {
+  const availableWidth = heroElement.clientWidth -
+    heroElement.style.paddingLeft - heroElement.style.paddingRight
+  const availableHeight = heroElement.clientHeight -
+    heroElement.style.paddingTop - heroElement.style.paddingBottom
+  const scale = Math.min( 
+    availableWidth / announcementElement.offsetWidth, 
+    availableHeight / announcementElement.offsetHeight 
+  )
+
+  announcementElement.style.transform = `scale(${scale})`
 }
 
 const makeBlocks = (...lines) => lines
@@ -49,4 +62,9 @@ if (today === donnerstag) {
       `Donners&#8203;tag!`
     )
   )
+
+  window.addEventListener('load', rescale)
+  window.addEventListener('resize', rescale)
+  window.addEventListener('orientationchange', rescale)
+  
 }

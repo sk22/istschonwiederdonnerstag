@@ -5,11 +5,19 @@
 body {
   font-family: 'Roboto Condensed', sans-serif;
   margin: 0;
+  height: 100vh;
+}
+
+.wrapper {
+  height: 100%;
+  padding: 2rem;
 }
 
 .hero {
-  height: 100vh;
-  padding: 2rem;
+  height: inherit;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .esistdo {
@@ -19,6 +27,8 @@ body {
 }
 
 .announcement {
+  display: inline-block;
+  transform-origin: 0% 50%;
   font-weight: 700;
   overflow-wrap: break-word;
   text-transform: uppercase;
@@ -26,7 +36,7 @@ body {
 }
 
 .announcement > .block {
-  display: inline-block;
+  display: block;
 }
 
 .portrait, .landscape {
@@ -45,17 +55,28 @@ body {
 @media (orientation: portrait) {
   .landscape { display: none; max-height: 100%; }
   .announcement {
-    height: 100%;
+    font-size: 20rem;
   }
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 320px) {
   .announcement {
-    font-size: 7rem;
+    font-size: 4rem;
   }
 }
-@media (min-width: 1440px) {
+@media (min-width: 375px) {
   .announcement {
-    font-size: 10rem;
+    font-size: 4rem;
   }
 }
+@media (min-width: 425px) {
+  .announcement {
+    font-size: 5rem;
+  }
+}
+@media (min-width: 530px) {
+  .announcement {
+    font-size: 6rem;
+  }
+} */
+
