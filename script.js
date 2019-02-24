@@ -38,7 +38,7 @@ const today = new Date().getDay()
 const donnerstag = 4
 const millisecondsPerDay = 86400000
 
-if (today === donnerstag) {
+if (true || today === donnerstag) {
   // ES IST WIEDER DONNERSTAG
   document.title = 'Es ist wieder Donnerstag!'
   show(esIstDoElement)
