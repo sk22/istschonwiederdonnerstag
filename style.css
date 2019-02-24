@@ -10,7 +10,7 @@ body {
 
 .wrapper {
   height: 100%;
-  padding: 5vw;
+  padding: 2rem;
 }
 
 .hero {
@@ -34,7 +34,7 @@ body {
   font-weight: 800;
   overflow-wrap: break-word;
   text-transform: uppercase;
-  font-size: 17vh;
+  font-size: 5rem;
 }
 
 .announcement > .block {
