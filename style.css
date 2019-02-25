@@ -14,21 +14,22 @@ body {
   height: 100vh;
 }
 
-body:hover {
+body:active {
   background: black;
-}
-
-body:hover a {
   color: white;
 }
 
-a {
-  color: black;
+a { color: black; }
+body:active a { color: white; }
+
+/* .footer { } */
+
+a.wrapping-a {
   text-decoration: none;
 }
 
 svg { fill: black; float: left; }
-body:hover svg { fill: white }
+body:active svg { fill: white }
 
 .wrapper {
   height: 100%;
@@ -70,8 +71,8 @@ body:hover svg { fill: white }
   max-height: 100%;
 }
 
-body .hoveronly, body:hover .nohoveronly { height: 0; visibility: hidden; }
-body .nohoveronly, body:hover .hoveronly { height: 100%; visibility: visible; }
+body .hoveronly, body:active .nohoveronly { height: 0; visibility: hidden; }
+body .nohoveronly, body:active .hoveronly { height: 100%; visibility: visible; }
 
 .hidden {
   display: none;
@@ -83,4 +84,21 @@ body .nohoveronly, body:hover .hoveronly { height: 100%; visibility: visible; }
 
 @media (orientation: portrait) {
   .landscape { display: none; max-height: 100%; }
+}
+
+@media (pointer: fine) {
+  body:hover .nohoveronly { height: 0; visibility: hidden; }
+  body:hover .hoveronly { height: 100%; visibility: visible; }
+  body:hover {
+    background: black;
+    color: white;
+  }
+  body:hover svg { fill: white }
+  body:hover a { color: white; }
+}
+
+@media (pointer: coarse) {
+  .hero {
+    user-select: none;
+  }
 }
