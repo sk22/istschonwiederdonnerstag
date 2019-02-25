@@ -9,6 +9,7 @@ function updateText(title) {
 function countdown(daysLeft) {
   if (daysLeft === 0) return 'HEUTE'
   if (daysLeft === 1) return 'morgen'
+  if (daysLeft === 2) return 'übermorgen'
   return `in ${daysLeft} Tagen`
 }
 
@@ -41,9 +42,8 @@ function updateIcon(link, days, originalUrl) {
   }
 }
 
-const makeBlocks = (...lines) => lines
-  .map(line => `<span class="block">${line}</span>`)
-  .join('\n')
+const makeBlock = (line, classes = '') =>
+  `<span class="block ${classes}">${line}</span>`
 
 const donnerstag = 4
 const millisecondsPerDay = 86400000
@@ -74,11 +74,12 @@ function update() {
     document.title = countdown(daysTilDonnerstag)
   
     updateText(
-      makeBlocks(
-        `Am ${dateString}`,
-        `ist wieder`,
-        `Donners&#8203;tag!`
-      )
+      [
+        makeBlock(countdown(daysTilDonnerstag), 'nohoveronly'),
+        makeBlock(`Am ${dateString}`, 'hoveronly'),
+        makeBlock(`ist wieder`),
+        makeBlock(`Donners&#8203;tag!`)
+      ].join('\n')
     )
   
     rescale()
@@ -89,4 +90,4 @@ function update() {
 }
 
 update()
-setInterval(update, 1000)
+let interval = setInterval(update, 1000)

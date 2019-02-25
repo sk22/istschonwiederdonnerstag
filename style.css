@@ -72,6 +72,9 @@ body:hover svg { fill: white }
   max-height: 100%;
 }
 
+body .hoveronly, body:hover .nohoveronly { height: 0; visibility: hidden; }
+body .nohoveronly, body:hover .hoveronly { height: auto; visibility: visible; }
+
 .hidden {
   display: none;
 }
@@ -83,25 +86,3 @@ body:hover svg { fill: white }
 @media (orientation: portrait) {
   .landscape { display: none; max-height: 100%; }
 }
-
-/* @media (min-width: 320px) {
-  .announcement {
-    font-size: 4rem;
-  }
-}
-@media (min-width: 375px) {
-  .announcement {
-    font-size: 4rem;
-  }
-}
-@media (min-width: 425px) {
-  .announcement {
-    font-size: 5rem;
-  }
-}
-@media (min-width: 530px) {
-  .announcement {
-    font-size: 6rem;
-  }
-} */
-
