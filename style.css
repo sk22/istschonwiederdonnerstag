@@ -13,13 +13,16 @@ body:hover {
 }
 
 body:hover a {
-  color: whitesmoke;
+  color: white;
 }
 
 a {
   color: black;
   text-decoration: none;
 }
+
+svg { fill: black; }
+body:hover svg { fill: white }
 
 .wrapper {
   height: 100%;

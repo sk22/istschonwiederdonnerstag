@@ -2,8 +2,7 @@ const announcementElement = document.getElementById('announcement')
 const esIstDoElement = document.getElementById('esistdo')
 const heroElement = document.getElementById('hero')
 
-function update(subtitle, title) {
-  // smallDiv.innerHTML = subtitle
+function updateText(title) {
   announcementElement.innerHTML = title
 }
 
@@ -15,6 +14,10 @@ function countdown(daysLeft) {
 
 function show(element) {
   element.classList.remove('hidden')
+}
+
+function hide(element) {
+  element.classList.add('hidden')
 }
 
 function rescale() {
@@ -30,41 +33,60 @@ function rescale() {
   announcementElement.style.transform = `scale(${scale})`
 }
 
+function updateIcon(link, days, originalUrl) {
+  if (days < 7 && days > 0) {
+    link.href = `countdown/${days}.png`;
+  } else {
+    link.href = originalUrl
+  }
+}
+
 const makeBlocks = (...lines) => lines
   .map(line => `<span class="block">${line}</span>`)
   .join('\n')
 
-const today = new Date().getDay()
 const donnerstag = 4
 const millisecondsPerDay = 86400000
+const link = document.querySelector("link[rel='shortcut icon']")
+  || document.createElement('link');
+const originalUrl = link.href
 
-if (today === donnerstag) {
-  // ES IST WIEDER DONNERSTAG
-  document.title = 'Es ist wieder Donnerstag!'
-  show(esIstDoElement)
-} else {
-  // BALD IST WIEDER DONNERSTAG
-  show(announcementElement)
+function update() {
+  const today = new Date().getDay()
   const daysTilDonnerstag = (donnerstag + 7 - today) % 7
-  const nextDonnerstag =
-    new Date(Date.now() + daysTilDonnerstag * millisecondsPerDay)
-  const dateString =
-    nextDonnerstag.toLocaleDateString('de-AT', {month: 'long', day: 'numeric' })
-  const plural = daysTilDonnerstag > 1
+  updateIcon(link, daysTilDonnerstag, originalUrl)
 
-  document.title = countdown(daysTilDonnerstag)
-
-  update(
-    `${daysTilDonnerstag} Tag${plural ? 'e' : ''} noch!`,
-    makeBlocks(
-      `Am ${dateString}`,
-      `ist wieder`,
-      `Donners&#8203;tag!`
-    )
-  )
-
-  window.addEventListener('load', rescale)
-  window.addEventListener('resize', rescale)
-  window.addEventListener('orientationchange', rescale)
+  if (today === donnerstag) {
+    // ES IST WIEDER DONNERSTAG
+    document.title = 'Es ist wieder Donnerstag!'
+    show(esIstDoElement)
+    hide(announcementElement)
+  } else {
+    // BALD IST WIEDER DONNERSTAG
+    show(announcementElement)
+    hide(esIstDoElement)
+    const nextDonnerstag =
+      new Date(Date.now() + daysTilDonnerstag * millisecondsPerDay)
+    const dateString =
+      nextDonnerstag.toLocaleDateString('de-AT', {month: 'long', day: 'numeric' })
+    const plural = daysTilDonnerstag > 1
   
+    document.title = countdown(daysTilDonnerstag)
+  
+    updateText(
+      makeBlocks(
+        `Am ${dateString}`,
+        `ist wieder`,
+        `Donners&#8203;tag!`
+      )
+    )
+  
+    rescale()
+    window.addEventListener('load', rescale)
+    window.addEventListener('resize', rescale)
+    window.addEventListener('orientationchange', rescale)
+  }  
 }
+
+update()
+setInterval(update, 1000)
