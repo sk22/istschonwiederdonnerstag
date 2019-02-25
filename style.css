@@ -8,6 +8,19 @@ body {
   height: 100vh;
 }
 
+body:hover {
+  background: black;
+}
+
+body:hover a {
+  color: whitesmoke;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
 .wrapper {
   height: 100%;
   padding: 2rem;
