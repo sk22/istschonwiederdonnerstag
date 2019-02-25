@@ -2,6 +2,12 @@
   box-sizing: border-box;
 }
 
+@keyframes appear {
+  0% { opacity: 0; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 body {
   font-family: 'Roboto Condensed', sans-serif;
   margin: 0;
@@ -34,6 +40,10 @@ body:hover svg { fill: white }
   width: 100%;
   display: flex;
   align-items: center;
+}
+
+.esistdo, .announcement {
+  animation: 0.3s appear ease;
 }
 
 .esistdo {
