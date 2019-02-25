@@ -6,10 +6,10 @@ function updateText(title) {
   announcementElement.innerHTML = title
 }
 
-function countdown(daysLeft) {
+function countdown(daysLeft, title) {
   if (daysLeft === 0) return 'HEUTE'
   if (daysLeft === 1) return 'morgen'
-  if (daysLeft === 2) return 'übermorgen'
+  if (daysLeft === 2) return title ? 'übermorgen' : 'über&#8203;morgen'
   return `in ${daysLeft} Tagen`
 }
 
@@ -88,7 +88,7 @@ function update(date) {
       .toLocaleDateString('de-AT', { month: 'long', day: 'numeric' })
     const plural = daysTilDonnerstag > 1
   
-    document.title = countdown(daysTilDonnerstag)
+    document.title = countdown(daysTilDonnerstag, true)
   
     updateText(
       [
