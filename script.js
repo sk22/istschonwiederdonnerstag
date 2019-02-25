@@ -67,8 +67,8 @@ function update() {
     hide(esIstDoElement)
     const nextDonnerstag =
       new Date(Date.now() + daysTilDonnerstag * millisecondsPerDay)
-    const dateString =
-      nextDonnerstag.toLocaleDateString('de-AT', {month: 'long', day: 'numeric' })
+    const dateString = nextDonnerstag
+      .toLocaleDateString('de-AT', { month: 'long', day: 'numeric' })
     const plural = daysTilDonnerstag > 1
   
     document.title = countdown(daysTilDonnerstag)
