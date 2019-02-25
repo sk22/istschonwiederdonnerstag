@@ -27,7 +27,7 @@ a {
   text-decoration: none;
 }
 
-svg { fill: black; }
+svg { fill: black; float: left; }
 body:hover svg { fill: white }
 
 .wrapper {
@@ -47,8 +47,6 @@ body:hover svg { fill: white }
 }
 
 .esistdo {
-  display: flex;
-  justify-content: center;
   height: 100%;
   width: 100%;
 }
@@ -73,7 +71,7 @@ body:hover svg { fill: white }
 }
 
 body .hoveronly, body:hover .nohoveronly { height: 0; visibility: hidden; }
-body .nohoveronly, body:hover .hoveronly { height: auto; visibility: visible; }
+body .nohoveronly, body:hover .hoveronly { height: 100%; visibility: visible; }
 
 .hidden {
   display: none;

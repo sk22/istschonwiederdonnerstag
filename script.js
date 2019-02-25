@@ -42,6 +42,11 @@ function updateIcon(link, days, originalUrl) {
   }
 }
 
+const replaceClassNames = (classOld, classNew) => element => {
+  element.classList.remove(classOld)
+  element.classList.add(classNew)
+}
+
 const makeBlock = (line, classes = '') =>
   `<span class="block ${classes}">${line}</span>`
 
@@ -51,8 +56,8 @@ const link = document.querySelector("link[rel='shortcut icon']")
   || document.createElement('link');
 const originalUrl = link.href
 
-function update() {
-  const today = new Date().getDay()
+function update(date) {
+  const today = date.getDay()
   const daysTilDonnerstag = (donnerstag + 7 - today) % 7
   updateIcon(link, daysTilDonnerstag, originalUrl)
 
@@ -61,6 +66,18 @@ function update() {
     document.title = 'Es ist wieder Donnerstag!'
     show(esIstDoElement)
     hide(announcementElement)
+
+    const jetztZam = 
+      Array.from(document.querySelectorAll('svg.jetztzam'))
+    const wiederDo =
+      Array.from(document.querySelectorAll('svg.wiederdo'))
+
+    const [ hoverOnly, noHoverOnly ] = date.getHours() >= 18
+      ? [ wiederDo, jetztZam ] : [ jetztZam, wiederDo ]
+
+     // WIR SIND JETZT ZUSAMMEN
+    hoverOnly.forEach(replaceClassNames('nohoveronly', 'hoveronly'))
+    noHoverOnly.forEach(replaceClassNames('hoveronly', 'nohoveronly'))
   } else {
     // BALD IST WIEDER DONNERSTAG
     show(announcementElement)
@@ -89,5 +106,9 @@ function update() {
   }  
 }
 
-update()
-let interval = setInterval(update, 1000)
+function run() {
+  update(new Date())
+}
+
+run()
+let interval = setInterval(run, 1000)
