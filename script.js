@@ -106,6 +106,8 @@ function update(date) {
   }  
 }
 
+document.body.addEventListener('dblclick', document.body.requestFullscreen)
+
 function run() {
   update(new Date())
 }
