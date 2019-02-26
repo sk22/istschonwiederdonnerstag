@@ -30,13 +30,13 @@ body {
   color: black;
 }
 
-#wrapper:active, #wrapper.touched {
+/* #wrapper:active, */ #wrapper.touched {
   background: black;
   color: white;
 }
 
 a { color: black; }
-#wrapper:active a, #wrapper.touched a { color: white; }
+/* #wrapper:active a, */ #wrapper.touched a { color: white; }
 
 /* .footer { } */
 
@@ -45,7 +45,7 @@ a.wrapping-a {
 }
 
 svg { fill: black; float: left; }
-#wrapper:active svg, #wrapper.touched svg { fill: white }
+/* #wrapper:active svg, */ #wrapper.touched svg { fill: white }
 
 .hero {
   flex: 1;
@@ -85,11 +85,11 @@ svg { fill: black; float: left; }
 }
 
 #wrapper .hoveronly,
-#wrapper:active .nohoveronly,
+/* #wrapper:active .nohoveronly, */
 #wrapper.touched .nohoveronly { height: 0; visibility: hidden; }
 
 #wrapper .nohoveronly,
-#wrapper:active .hoveronly,
+/* #wrapper:active .hoveronly, */
 #wrapper.touched .hoveronly { height: 100%; visibility: visible; }
 
 .hidden {
@@ -104,7 +104,7 @@ svg { fill: black; float: left; }
   .landscape { display: none; max-height: 100%; }
 }
 
-@media (pointer: fine) {
+/* @media (pointer: fine) {
   #wrapper:hover .nohoveronly { height: 0; visibility: hidden; }
   #wrapper:hover .hoveronly { height: 100%; visibility: visible; }
   #wrapper:hover {
@@ -113,9 +113,9 @@ svg { fill: black; float: left; }
   }
   #wrapper:hover svg { fill: white }
   #wrapper:hover a { color: white; }
-}
+} */
 
-@media (pointer: coarse) {
+/* @media (pointer: coarse) { */
   .hero {
     user-select: none;
   }
@@ -132,4 +132,4 @@ svg { fill: black; float: left; }
     position: relative;
     z-index: 2;
   }
-}
+/* } */

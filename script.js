@@ -23,13 +23,17 @@ function hide(element) {
 }
 
 function rescale() {
-  const availableWidth = heroElement.clientWidth -
-    heroElement.style.paddingLeft - heroElement.style.paddingRight
-  const availableHeight = heroElement.clientHeight -
-    heroElement.style.paddingTop - heroElement.style.paddingBottom
-  const scale = Math.min( 
-    availableWidth / announcementElement.offsetWidth, 
-    availableHeight / announcementElement.offsetHeight 
+  const availableWidth =
+    heroElement.clientWidth -
+    heroElement.style.paddingLeft -
+    heroElement.style.paddingRight
+  const availableHeight =
+    heroElement.clientHeight -
+    heroElement.style.paddingTop -
+    heroElement.style.paddingBottom
+  const scale = Math.min(
+    availableWidth / announcementElement.offsetWidth,
+    availableHeight / announcementElement.offsetHeight
   )
 
   announcementElement.style.transform = `scale(${scale})`
@@ -37,7 +41,7 @@ function rescale() {
 
 function updateIcon(link, days, originalUrl) {
   if (days < 7 && days > 0) {
-    link.href = `countdown/${days}.png`;
+    link.href = `countdown/${days}.png`
   } else {
     link.href = originalUrl
   }
@@ -53,8 +57,9 @@ const makeBlock = (line, classes = '') =>
 
 const donnerstag = 4
 const millisecondsPerDay = 86400000
-const link = document.querySelector("link[rel='shortcut icon']")
-  || document.createElement('link');
+const link =
+  document.querySelector("link[rel='shortcut icon']") ||
+  document.createElement('link')
 const originalUrl = link.href
 
 function update(date) {
@@ -68,29 +73,30 @@ function update(date) {
     show(esIstDoElement)
     hide(announcementElement)
 
-    const jetztZam = 
-      Array.from(document.querySelectorAll('svg.jetztzam'))
-    const wiederDo =
-      Array.from(document.querySelectorAll('svg.wiederdo'))
+    const jetztZam = Array.from(document.querySelectorAll('svg.jetztzam'))
+    const wiederDo = Array.from(document.querySelectorAll('svg.wiederdo'))
 
-    const [ hoverOnly, noHoverOnly ] = date.getHours() >= 18
-      ? [ wiederDo, jetztZam ] : [ jetztZam, wiederDo ]
+    const [hoverOnly, noHoverOnly] =
+      date.getHours() >= 18 ? [wiederDo, jetztZam] : [jetztZam, wiederDo]
 
-     // WIR SIND JETZT ZUSAMMEN
+    // WIR SIND JETZT ZUSAMMEN
     hoverOnly.forEach(replaceClassNames('nohoveronly', 'hoveronly'))
     noHoverOnly.forEach(replaceClassNames('hoveronly', 'nohoveronly'))
   } else {
     // BALD IST WIEDER DONNERSTAG
     show(announcementElement)
     hide(esIstDoElement)
-    const nextDonnerstag =
-      new Date(Date.now() + daysTilDonnerstag * millisecondsPerDay)
-    const dateString = nextDonnerstag
-      .toLocaleDateString('de-AT', { month: 'long', day: 'numeric' })
+    const nextDonnerstag = new Date(
+      Date.now() + daysTilDonnerstag * millisecondsPerDay
+    )
+    const dateString = nextDonnerstag.toLocaleDateString('de-AT', {
+      month: 'long',
+      day: 'numeric'
+    })
     const plural = daysTilDonnerstag > 1
-  
+
     document.title = countdown(daysTilDonnerstag, true)
-  
+
     updateText(
       [
         makeBlock(countdown(daysTilDonnerstag), 'nohoveronly'),
@@ -99,33 +105,57 @@ function update(date) {
         makeBlock(`Donners&#8203;tag!`)
       ].join('\n')
     )
-  
+
     rescale()
     window.addEventListener('load', rescale)
     window.addEventListener('resize', rescale)
     window.addEventListener('orientationchange', rescale)
-  }  
+  }
 }
 
 wrapperElement.addEventListener('dblclick', wrapperElement.requestFullscreen)
 
-heroElement.addEventListener('touchstart', event => event.stopPropagation(), true)
 
-const makeTouchSwitch = value =>  event => {
+let inverse = false
+let preventClick = false
+
+const addTouched = () =>
+  inverse
+    ? wrapperElement.classList.remove('touched')
+    : wrapperElement.classList.add('touched')
+const removeTouched = () =>
+  inverse
+    ? wrapperElement.classList.add('touched')
+    : wrapperElement.classList.remove('touched')
+
+const makeTouchSwitch = value => event => {
   if (value) {
-    wrapperElement.classList.add('touched')
-    touchStartTime = event.timeStamp
+    addTouched()
   } else {
-    const timeTouched = event.timeStamp - touchStartTime
     // timeout gives buffer because css :active triggers
-    setTimeout(() => wrapperElement.classList.remove('touched'))
+    removeTouched()
   }
 }
 
-wrapperElement.addEventListener('touchstart', makeTouchSwitch(true), true)
-wrapperElement.addEventListener('touchend', makeTouchSwitch(false), true)
-wrapperElement.addEventListener('touchcancel', makeTouchSwitch(false), true)
+const makeTouchHandler = value => {
+  let timeout
+  return event => {
+    if (timeout) clearTimeout(timeout)
+    preventClick = true
+    timeout = setTimeout(() => preventClick = false, 100)
+    makeTouchSwitch(value)(event)
+  }
+}
 
+wrapperElement.addEventListener('click', event => {
+  if (preventClick) return
+  wrapperElement.classList.toggle('touched')
+  inverse = !inverse
+})
+
+wrapperElement.addEventListener('touchstart', makeTouchHandler(true), true)
+wrapperElement.addEventListener('touchend', makeTouchHandler(false), true)
+wrapperElement.addEventListener('touchcancel', makeTouchSwitch(false), true)
 
 function run() {
   update(new Date())
@@ -136,11 +166,10 @@ hero.classList.remove('hidden')
 run()
 let interval = setInterval(run, 1000)
 
-
 function initScrollSnap() {
-  let items = document.querySelectorAll(".page");
+  let items = document.querySelectorAll('.page')
   for (let i = 0; i < items.length; i++) {
-      items[i].style.minHeight = "100vh";
+    items[i].style.minHeight = '100vh'
   }
 
   cssScrollSnapPolyfill()
