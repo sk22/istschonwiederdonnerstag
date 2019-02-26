@@ -1,6 +1,7 @@
 const announcementElement = document.getElementById('announcement')
 const esIstDoElement = document.getElementById('esistdo')
 const heroElement = document.getElementById('hero')
+const wrapperElements = document.getElementsByClassName('wrapper')
 
 function updateText(title) {
   announcementElement.innerHTML = title
@@ -56,8 +57,6 @@ const link = document.querySelector("link[rel='shortcut icon']")
   || document.createElement('link');
 const originalUrl = link.href
 
-hero.classList.remove('hidden')
-
 function update(date) {
   const today = date.getDay()
   const daysTilDonnerstag = (donnerstag + 7 - today) % 7
@@ -110,9 +109,34 @@ function update(date) {
 
 document.body.addEventListener('dblclick', document.body.requestFullscreen)
 
+heroElement.addEventListener('touchstart', event => event.stopPropagation(), true)
+
+Array.from(wrapperElements).forEach(wrapper => {
+  let touchStartTime
+  const makeTouchSwitch = value =>  event => {
+    console.log(event)
+    event.stopImmediatePropagation()
+    if (value) {
+      wrapper.classList.add('touched')
+      touchStartTime = event.timeStamp
+    } else {
+      const timeTouched = event.timeStamp - touchStartTime
+      setTimeout(() => wrapper.classList.remove('touched'))
+      // timeTouched < 10 ? 10 - timeTouched :0)
+    }
+  }
+
+  document.body.addEventListener('touchstart', makeTouchSwitch(true), true)
+  document.body.addEventListener('touchend', makeTouchSwitch(false), true)
+  document.body.addEventListener('touchcancel', makeTouchSwitch(false), true)
+
+})
+
 function run() {
   update(new Date())
 }
+
+hero.classList.remove('hidden')
 
 run()
 let interval = setInterval(run, 1000)
