@@ -14,18 +14,18 @@ body {
   height: 100vh;
 }
 
-.wrapper {
+#wrapper {
   background: white;
   color: black;
 }
 
-.wrapper:active, .wrapper.touched {
+#wrapper:active, #wrapper.touched {
   background: black;
   color: white;
 }
 
 a { color: black; }
-.wrapper:active a, .wrapper.touched a { color: white; }
+#wrapper:active a, #wrapper.touched a { color: white; }
 
 /* .footer { } */
 
@@ -34,9 +34,9 @@ a.wrapping-a {
 }
 
 svg { fill: black; float: left; }
-.wrapper:active svg, .wrapper.touched svg { fill: white }
+#wrapper:active svg, #wrapper.touched svg { fill: white }
 
-.wrapper {
+.page {
   height: 100%;
   padding: 2rem;
 }
@@ -76,13 +76,13 @@ svg { fill: black; float: left; }
   max-height: 100%;
 }
 
-.wrapper .hoveronly,
-.wrapper:active .nohoveronly,
-.wrapper.touched .nohoveronly { height: 0; visibility: hidden; }
+#wrapper .hoveronly,
+#wrapper:active .nohoveronly,
+#wrapper.touched .nohoveronly { height: 0; visibility: hidden; }
 
-.wrapper .nohoveronly,
-.wrapper:active .hoveronly,
-.wrapper.touched .hoveronly { height: 100%; visibility: visible; }
+#wrapper .nohoveronly,
+#wrapper:active .hoveronly,
+#wrapper.touched .hoveronly { height: 100%; visibility: visible; }
 
 .hidden {
   display: none;
@@ -97,14 +97,14 @@ svg { fill: black; float: left; }
 }
 
 @media (pointer: fine) {
-  .wrapper:hover .nohoveronly { height: 0; visibility: hidden; }
-  .wrapper:hover .hoveronly { height: 100%; visibility: visible; }
-  .wrapper:hover {
+  #wrapper:hover .nohoveronly { height: 0; visibility: hidden; }
+  #wrapper:hover .hoveronly { height: 100%; visibility: visible; }
+  #wrapper:hover {
     background: black;
     color: white;
   }
-  .wrapper:hover svg { fill: white }
-  .wrapper:hover a { color: white; }
+  #wrapper:hover svg { fill: white }
+  #wrapper:hover a { color: white; }
 }
 
 @media (pointer: coarse) {

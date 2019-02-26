@@ -1,7 +1,7 @@
 const announcementElement = document.getElementById('announcement')
 const esIstDoElement = document.getElementById('esistdo')
 const heroElement = document.getElementById('hero')
-const wrapperElements = document.getElementsByClassName('wrapper')
+const wrapperElement = document.getElementById('wrapper')
 
 function updateText(title) {
   announcementElement.innerHTML = title
@@ -111,26 +111,21 @@ document.body.addEventListener('dblclick', document.body.requestFullscreen)
 
 heroElement.addEventListener('touchstart', event => event.stopPropagation(), true)
 
-Array.from(wrapperElements).forEach(wrapper => {
-  let touchStartTime
-  const makeTouchSwitch = value =>  event => {
-    console.log(event)
-    event.stopImmediatePropagation()
-    if (value) {
-      wrapper.classList.add('touched')
-      touchStartTime = event.timeStamp
-    } else {
-      const timeTouched = event.timeStamp - touchStartTime
-      setTimeout(() => wrapper.classList.remove('touched'))
-      // timeTouched < 10 ? 10 - timeTouched :0)
-    }
+const makeTouchSwitch = value =>  event => {
+  if (value) {
+    wrapperElement.classList.add('touched')
+    touchStartTime = event.timeStamp
+  } else {
+    const timeTouched = event.timeStamp - touchStartTime
+    // timeout gives buffer because css :active triggers
+    setTimeout(() => wrapperElement.classList.remove('touched'))
   }
+}
 
-  document.body.addEventListener('touchstart', makeTouchSwitch(true), true)
-  document.body.addEventListener('touchend', makeTouchSwitch(false), true)
-  document.body.addEventListener('touchcancel', makeTouchSwitch(false), true)
+document.body.addEventListener('touchstart', makeTouchSwitch(true), true)
+document.body.addEventListener('touchend', makeTouchSwitch(false), true)
+document.body.addEventListener('touchcancel', makeTouchSwitch(false), true)
 
-})
 
 function run() {
   update(new Date())
