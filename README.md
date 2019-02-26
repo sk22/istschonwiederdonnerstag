@@ -7,3 +7,8 @@ Website for wiederdonnerstag.at that shows the next thursday 📢🏳️‍🌈
 * Shows the date of the next thursday when hovering / touching the screen
 * Shows "ES IST WIEDER DONNERSTAG" and "WIR SIND JETZT ZUSAMMEN"
 * Links to [wiederdonnerstag.at](https://wiederdonnerstag.at)
+
+## Debugging
+
+* `clearInterval(interval)`
+* `update(new Date(2019, 1, 28, 18, 00))`
