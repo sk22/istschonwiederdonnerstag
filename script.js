@@ -56,6 +56,8 @@ const link = document.querySelector("link[rel='shortcut icon']")
   || document.createElement('link');
 const originalUrl = link.href
 
+hero.classList.remove('hidden')
+
 function update(date) {
   const today = date.getDay()
   const daysTilDonnerstag = (donnerstag + 7 - today) % 7
