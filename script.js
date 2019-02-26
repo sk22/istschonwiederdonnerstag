@@ -22,15 +22,18 @@ function hide(element) {
   element.classList.add('hidden')
 }
 
+const getPixelNumber = value => Number(value.slice(0, -2))
+
 function rescale() {
+  const style = getComputedStyle(heroElement)
   const availableWidth =
     heroElement.clientWidth -
-    heroElement.style.paddingLeft -
-    heroElement.style.paddingRight
+    getPixelNumber(style.paddingLeft) -
+    getPixelNumber(style.paddingRight)
   const availableHeight =
     heroElement.clientHeight -
-    heroElement.style.paddingTop -
-    heroElement.style.paddingBottom
+    getPixelNumber(style.paddingTop) -
+    getPixelNumber(style.paddingBottom)
   const scale = Math.min(
     availableWidth / announcementElement.offsetWidth,
     availableHeight / announcementElement.offsetHeight

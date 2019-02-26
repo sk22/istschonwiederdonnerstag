@@ -12,13 +12,11 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
   margin: 0;
   min-height: 100vh;
-  scroll-snap-type: y mandatory;
 }
 
 .page {
   min-height: 100vh;
   padding: 1.5rem;
-  scroll-snap-align: start;
   background: whitesmoke;
 }
 
@@ -49,9 +47,8 @@ svg { fill: black; float: left; }
 
 .hero {
   flex: 1;
-  height: 100%;
-  width: 100%;
-  padding: 1.5rem 0;
+  height: 0;
+  padding: 1rem 0;
   display: flex;
   align-items: center;
 }
@@ -131,5 +128,10 @@ svg { fill: black; float: left; }
   .footer {
     position: relative;
     z-index: 2;
+    flex: 0 0 1.5rem;
   }
 /* } */
+
+.fullscreen-notice {
+  font-size: 75%;
+}
