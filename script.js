@@ -165,13 +165,3 @@ hero.classList.remove('hidden')
 
 run()
 let interval = setInterval(run, 1000)
-
-function initScrollSnap() {
-  let items = document.querySelectorAll('.page')
-  for (let i = 0; i < items.length; i++) {
-    items[i].style.minHeight = '100vh'
-  }
-
-  cssScrollSnapPolyfill()
-}
-initScrollSnap()
