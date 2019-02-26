@@ -107,7 +107,7 @@ function update(date) {
   }  
 }
 
-document.body.addEventListener('dblclick', document.body.requestFullscreen)
+wrapperElement.addEventListener('dblclick', wrapperElement.requestFullscreen)
 
 heroElement.addEventListener('touchstart', event => event.stopPropagation(), true)
 
@@ -122,9 +122,9 @@ const makeTouchSwitch = value =>  event => {
   }
 }
 
-document.body.addEventListener('touchstart', makeTouchSwitch(true), true)
-document.body.addEventListener('touchend', makeTouchSwitch(false), true)
-document.body.addEventListener('touchcancel', makeTouchSwitch(false), true)
+wrapperElement.addEventListener('touchstart', makeTouchSwitch(true), true)
+wrapperElement.addEventListener('touchend', makeTouchSwitch(false), true)
+wrapperElement.addEventListener('touchcancel', makeTouchSwitch(false), true)
 
 
 function run() {
@@ -135,3 +135,14 @@ hero.classList.remove('hidden')
 
 run()
 let interval = setInterval(run, 1000)
+
+
+function initScrollSnap() {
+  let items = document.querySelectorAll(".page");
+  for (let i = 0; i < items.length; i++) {
+      items[i].style.minHeight = "100vh";
+  }
+
+  cssScrollSnapPolyfill()
+}
+initScrollSnap()

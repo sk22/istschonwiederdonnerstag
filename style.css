@@ -11,10 +11,21 @@
 body {
   font-family: 'Roboto Condensed', sans-serif;
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
+  scroll-snap-type: y mandatory;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 1.5rem;
+  scroll-snap-align: start;
+  background: whitesmoke;
 }
 
 #wrapper {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
   background: white;
   color: black;
 }
@@ -36,14 +47,11 @@ a.wrapping-a {
 svg { fill: black; float: left; }
 #wrapper:active svg, #wrapper.touched svg { fill: white }
 
-.page {
-  height: 100%;
-  padding: 2rem;
-}
-
 .hero {
+  flex: 1;
   height: 100%;
   width: 100%;
+  padding: 1.5rem 0;
   display: flex;
   align-items: center;
 }
@@ -53,7 +61,7 @@ svg { fill: black; float: left; }
 }
 
 .esistdo {
-  height: 90%;
+  height: 100%;
   width: 100%;
 }
 
