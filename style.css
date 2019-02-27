@@ -63,7 +63,8 @@ svg { fill: black; float: left; }
 }
 
 .announcement {
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
   transform-origin: 0% 50%;
   /* 800 because Android uses normal weight of local file otherwise */
   font-weight: 800;
