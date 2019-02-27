@@ -123,9 +123,8 @@ function update(date) {
 
 wrapperElement.addEventListener('dblclick', wrapperElement.requestFullscreen)
 
-
 let inverse = false
-let preventClick = false
+let preventClickUntil = 0
 
 const addTouched = () =>
   inverse
@@ -145,18 +144,13 @@ const makeTouchSwitch = value => event => {
   }
 }
 
-const makeTouchHandler = value => {
-  let timeout
-  return event => {
-    if (timeout) clearTimeout(timeout)
-    preventClick = true
-    timeout = setTimeout(() => preventClick = false, 100)
-    makeTouchSwitch(value)(event)
-  }
+const makeTouchHandler = value => event => {
+  preventClickUntil = event.timeStamp + 1000
+  makeTouchSwitch(value)(event)
 }
 
 wrapperElement.addEventListener('click', event => {
-  if (preventClick) return
+  if (event.timeStamp < preventClickUntil) return
   wrapperElement.classList.toggle('touched')
   inverse = !inverse
 })
