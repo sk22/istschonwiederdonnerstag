@@ -65,6 +65,8 @@ const link =
   document.createElement('link')
 const originalUrl = link.href
 
+let lastText
+
 function update(date) {
   const today = date.getDay()
   const daysTilDonnerstag = (donnerstag + 7 - today) % 7
@@ -100,14 +102,17 @@ function update(date) {
 
     document.title = countdown(daysTilDonnerstag, true)
 
-    updateText(
-      [
-        makeBlock(countdown(daysTilDonnerstag), 'nohoveronly'),
-        makeBlock(`Am ${dateString}`, 'hoveronly'),
-        makeBlock(`ist wieder`),
-        makeBlock(`Donners&#8203;tag!`)
-      ].join('\n')
-    )
+    const newText = `
+      <span class="nohoveronly">${countdown(daysTilDonnerstag)}</span>
+      <span class="hoveronly">Am ${dateString}</span>
+      <span>ist wieder</span>
+      <span>Donners&#8203;tag!</span>
+    `
+
+    if (newText !== lastText) {
+      lastText = newText
+      updateText(newText)
+    }
 
     rescale()
     window.addEventListener('load', rescale)
