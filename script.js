@@ -103,10 +103,10 @@ function update(date) {
     document.title = countdown(daysTilDonnerstag, true)
 
     const newText = `
-      <span class="nohoveronly">${countdown(daysTilDonnerstag)}</span>
-      <span class="hoveronly">Am ${dateString}</span>
-      <span>ist wieder</span>
-      <span>Donners&#8203;tag!</span>
+      <div class="nohoveronly">${countdown(daysTilDonnerstag)}</div>
+      <div class="hoveronly">Am ${dateString}</div>
+      <div>ist wieder</div>
+      <div>Donners&#8203;tag!</div>
     `
 
     if (newText !== lastText) {
