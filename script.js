@@ -138,9 +138,11 @@ const removeTouched = () =>
 const makeTouchSwitch = value => event => {
   if (value) {
     addTouched()
+    document.querySelector("meta[name='theme-color']").setAttribute("content", "#000000")
   } else {
     // timeout gives buffer because css :active triggers
     removeTouched()
+    document.querySelector("meta[name='theme-color']").setAttribute("content", "#FFFFFF")
   }
 }
 
@@ -153,6 +155,7 @@ wrapperElement.addEventListener('click', event => {
   if (event.timeStamp < preventClickUntil) return
   wrapperElement.classList.toggle('touched')
   inverse = !inverse
+  document.querySelector("meta[name='theme-color']").setAttribute("content", inverse ? "#000000" : "#FFFFFF")
 })
 
 wrapperElement.addEventListener('touchstart', makeTouchHandler(true), true)
